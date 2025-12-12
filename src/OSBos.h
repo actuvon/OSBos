@@ -86,6 +86,9 @@ private:
   unsigned long _lastRuntime_us;    // The duration that the thread hogged the CPU when last called
 };
 
+// A helper function to easily generate new terminal tasks
+Thread NewTerminalTask(AsyncFunc rootMethod, unsigned int readyPeriod_ms);
+
 class OSBos {
 public:
   OSBos(uint8_t numThreads);

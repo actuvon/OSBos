@@ -1,6 +1,17 @@
 #include "Arduino.h"
 #include "OSBos.h"
 
+Thread NewTerminalTask(AsyncFunc rootMethod, unsigned int readyPeriod_ms){
+  Thread t;
+
+  t.Active = false; // Terminal tasks should start inactive, so they don't trigger until they're told to
+  t.RootMethod = rootMethod;
+  t.ReadyPeriod_ms = readyPeriod_ms;
+  t.IsTerminalTask = true;
+
+  return t;
+}
+
 OSBos::OSBos(uint8_t numThreads){
   _numberOfThreads = numThreads;
   _nextThreadIx = 0;
